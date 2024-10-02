@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #343a40; /* Dark gray background */
+            color: #ffffff; /* White text for better contrast */
+        }
+        h1 {
+            color: #ff69b4; /* Hot pink for the main heading */
+            margin-bottom: 30px;
+        }
+        h3 {
+            color: #ff69b4; /* Hot pink for section headings */
+        }
+        .banner {
+            width: 100%;
+            background-color: #ff69b4; /* Bright pink background for the banner */
+            color: black;
+            text-align: center;
+            padding: 30px 0; /* Increased padding for a bigger banner */
+            font-size: 36px; /* Larger font size */
+            font-family: 'Lobster', cursive; /* Stylish font from Google Fonts */
+            position: fixed; /* Fixed position at the top */
+            top: 0;
+            left: 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+            letter-spacing: 2px; /* Spacing between letters for a sleek look */
+            z-index: 999; /* Ensure the banner is above other content */
+        }
+        /* Add margin to the content to avoid overlap with the banner */
+        .container {
+            margin-top: 130px; /* Adjust margin to create space for the banner */
+        }
+        .list-group-item {
+            background-color: #495057; /* Slightly lighter dark gray for history items */
+            color: #ffffff; /* White text */
+        }
+        .list-group-item:hover {
+            background-color: #ff69b4; /* Hot pink on hover */
+            color: #ffffff; /* White text */
+        }
+        select {
+            background-color: #495057; /* Darker background for the select element */
+            color: #ffffff; /* White text */
+            border: 1px solid #ff69b4; /* Hot pink border */
+        }
+        select:focus {
+            background-color: #495057; /* Keep dark background on focus */
+            color: #ffffff; /* Keep white text on focus */
+            border-color: #ff69b4; /* Hot pink border on focus */
+        }
+        button {
+            background-color: #ff69b4; /* Hot pink button */
+            border: none; /* Remove border */
+        }
+        button:hover {
+            background-color: #ff1493; /* Darker pink on hover */
+        }
+        .logout-btn {
+            background-color: #dc3545; /* Bootstrap danger color for logout */
+        }
+        .logout-btn:hover {
+            background-color: #c82333; /* Darker red on hover */
+        }
+    </style>
+    <title>Music List</title>
+</head>
+<body>
+<div class="banner">
+     Tuneify Music List
+</div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Your Search History</h3>
+                <ul class="list-group">
+                    {% for query in user_history %}
+                        <li class="list-group-item">{{ query }}</li>
+                    {% else %}
+                        <li class="list-group-item">No search history.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-8">
+                <h3>Available Songs</h3>
+                <form action="/recommend" method="POST">
+                    <select name="selected_song" required>
+                        {% for song in music_list %}
+                            <option value="{{ song }}">{{ song }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn">Recommend</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

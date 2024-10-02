@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #343a40; /* Dark gray background */
+            color: #ffffff; /* White text for better contrast */
+        }
+        .banner {
+            width: 100%;
+            background-color: #ff69b4; /* Bright pink background for the banner */
+            color: black;
+            text-align: center;
+            padding: 30px 0; /* Increased padding for a bigger banner */
+            font-size: 36px; /* Larger font size */
+            font-family: 'Lobster', cursive; /* Stylish font from Google Fonts */
+            position: fixed; /* Fixed position at the top */
+            top: 0;
+            left: 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+            letter-spacing: 2px; /* Spacing between letters for a sleek look */
+            z-index: 999; /* Ensure the banner is above other content */
+        }
+        /* Add margin to the body to prevent content overlap */
+        .content {
+            margin-top: 120px; /* Increased value to accommodate the banner height */
+        }
+        h1 {
+            color: #ff69b4; /* Hot pink for the main heading */
+            margin-bottom: 30px;
+        }
+        .card {
+            margin-bottom: 20px; /* Space between cards */
+            border: 1px solid #ff69b4; /* Hot pink border */
+            background-color: #495057; /* Slightly lighter dark gray for cards */
+        }
+        .card-title {
+            color: #ff69b4; /* Hot pink color for the song titles */
+        }
+        .list-group-item {
+            background-color: #495057; /* Slightly lighter dark gray for history items */
+            color: #ffffff; /* White text */
+        }
+        .list-group-item:hover {
+            background-color: #ff69b4; /* Hot pink on hover */
+            color: #ffffff; /* White text */
+        }
+        .logout-btn {
+            background-color: #1e3a8a; /* Dark blue color for the logout button */
+            color: #ffffff;
+            border: none; /* Remove border */
+        }
+        .logout-btn:hover {
+            background-color: #174081; /* Darker blue on hover */
+        }
+        /* Position the logout button in the top-right corner */
+        .logout-container {
+            position: fixed; /* Change to fixed position */
+            top: 40px; /* Adjust to be below the banner */
+            right: 20px;
+            z-index: 1000; /* Ensure it is above other content */
+        }
+    </style>
+    <title>Recommendations</title>
+</head>
+<body>
+<div class="banner">
+     Tuneify Music Recommendations
+</div>
+    <div class="container content">
+        <!-- Top-right logout button -->
+        <div class="logout-container">
+            <form action="/logout" method="POST">
+                <button type="submit" class="btn logout-btn">Log Out</button>
+            </form>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Your Search History</h3>
+                <ul class="list-group">
+                    {% for query in user_history %}
+                        <li class="list-group-item">{{ query }}</li>
+                    {% else %}
+                        <li class="list-group-item">No search history.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-8">
+                <h3>Recommended Music</h3>
+                <div class="row">
+                    {% for name, poster in recommended_music %}
+                        <div class="col-md-4">
+                            <div class="card">
+                                <img src="{{ poster }}" class="card-img-top" alt="{{ name }}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ name }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

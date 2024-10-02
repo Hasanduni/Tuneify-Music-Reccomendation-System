@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@500&family=Lobster&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #343a40; /* Dark grey background */
+            font-family: 'Roboto', sans-serif; /* Font style */
+        }
+        h1 {
+            color: #ff69b4; /* Hot pink for the main heading */
+            margin-bottom: 30px;
+        }
+        .banner {
+            width: 100%;
+            background-color: #ff69b4; /* Bright pink background for the banner */
+            color: black;
+            text-align: center;
+            padding: 30px 0; /* Increased padding for a bigger banner */
+            font-size: 36px; /* Larger font size */
+            font-family: 'Lobster', cursive; /* Stylish font from Google Fonts */
+            position: absolute;
+            top: 0;
+            left: 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+            letter-spacing: 2px; /* Spacing between letters for a sleek look */
+        }
+        .login-form {
+            background: #818589; /* Light grey form background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 350px; /* Fixed width for consistency */
+            margin-top: 160px; /* Push the login form below the larger banner */
+        }
+        h2 {
+            font-family: 'Montserrat', sans-serif; /* Different font for the title */
+            color: #343a40; /* Dark gray color for the title */
+            margin-bottom: 20px;
+        }
+        .btn-pink {
+            background-color: #ff69b4; /* Pink background color */
+            border-color: #ff69b4; /* Pink border color */
+        }
+        .btn-pink:hover {
+            background-color: #ff1493; /* Darker pink on hover */
+            border-color: #ff1493; /* Darker pink border on hover */
+        }
+        .alert {
+            margin-bottom: 20px; /* Space above alert */
+        }
+        a {
+            color:  #81334C ; /* Pink link color */
+        }
+        a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+    </style>
+</head>
+<body>
+
+<div class="banner">
+    Welcome to Tuneify Music Recommendations
+</div>
+
+<div class="login-form">
+    <h2 class="text-center">Login</h2>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-danger">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    <form method="POST" action="{{ url_for('login') }}">
+        <div class="form-group">
+            <label for="user_id">User ID</label>
+            <input type="text" class="form-control" id="user_id" name="user_id" required>
+        </div>
+        <button type="submit" class="btn btn-pink btn-block">Login</button>
+    </form>
+</div>
+
+</body>
+</html>
